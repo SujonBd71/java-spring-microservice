@@ -1,6 +1,8 @@
 package com.appdeveloperblog.app.ws.ui.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,13 +32,13 @@ public class UserController {
 					MediaType.APPLICATION_JSON_VALUE
 					}
 	)
-	public UserRest getUser(@PathVariable String userId) {
+	public ResponseEntity<UserRest> getUser(@PathVariable String userId) {
 		 UserRest user = new UserRest();
 		 user.setFirstName("Ha");
 		 user.setLastName("Sa");
 		 user.setEmail("s@a.com");
 		 
-		return user;
+		return new ResponseEntity<UserRest>(user, HttpStatus.OK);
 	}
 
 	@PostMapping
