@@ -1,5 +1,6 @@
 package com.appdeveloperblog.app.ws.ui.controller;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,6 +9,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.appdeveloperblog.app.ws.ui.model.response.UserRest;
 
 @RestController
 @RequestMapping("users")
@@ -21,9 +24,19 @@ public class UserController {
 		return "get user called with page: " + page +",limit:" + limit; 
 	}
 	
-	@GetMapping(path="/{userId}")
-	public String getUser(@PathVariable String userId) {
-		return "get user called with id: " + userId; 
+	@GetMapping(path="/{userId}", 
+			produces= {
+					MediaType.APPLICATION_XML_VALUE,
+					MediaType.APPLICATION_JSON_VALUE
+					}
+	)
+	public UserRest getUser(@PathVariable String userId) {
+		 UserRest user = new UserRest();
+		 user.setFirstName("Ha");
+		 user.setLastName("Sa");
+		 user.setEmail("s@a.com");
+		 
+		return user;
 	}
 
 	@PostMapping
